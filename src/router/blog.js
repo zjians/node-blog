@@ -1,9 +1,8 @@
 const url = require('url');
 const {getList, getDetail, createBlog} = require('../controller/blog');
 const {ErrorModel, SuccessModel} = require('../model/resModel');
-const {getPostData} = require('../../utils');
 
-const handleBlogRouter = async (req, res) => {
+const handleBlogRouter = (req, res) => {
   const {method} = req;
   const {query, pathname} = url.parse(req.url, true);
   if (method === 'GET') {
@@ -19,7 +18,7 @@ const handleBlogRouter = async (req, res) => {
     }
   } else if (method === 'POST') {
     if (pathname === '/api/blog/new') {
-      const params = await getPostData(req);
+      const params = req.body;
       const data = createBlog(params);
       return new SuccessModel(data);
     }

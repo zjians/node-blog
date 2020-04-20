@@ -1,7 +1,9 @@
 const handleUserRouter = require('./src/router/user');
 const handleBlogRouter = require('./src/router/blog');
+const {getPostData} = require('./utils');
 
 exports.handleServer = async (req, res) => {
+  req.body = await getPostData(req);
   const userRouter = handleUserRouter(req, res);
   const blogRouter = await handleBlogRouter(req, res);
   res.writeHead(200, {'Content-Type': 'application/json'});
