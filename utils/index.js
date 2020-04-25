@@ -1,7 +1,7 @@
 const getPostData = (req) => {
   if (
     req.method === 'POST' &&
-    req.headers['Content-Type'] === 'application/json'
+    req.headers['content-type'] === 'application/json'
   ) {
     return new Promise((resolve, reject) => {
       let res = '';

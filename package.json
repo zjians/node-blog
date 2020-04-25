@@ -4,9 +4,16 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "supervisor bin/www.js"
+    "dev": "cross-env NODE_ENV=development supervisor bin/www.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "supervisor": "^0.12.0"
+  }
 }
