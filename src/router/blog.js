@@ -4,6 +4,7 @@ const {
   getDetail,
   createBlog,
   updateBlog,
+  deleteBlog,
 } = require('../controller/blog');
 const {ErrorModel, SuccessModel} = require('../model/resModel');
 
@@ -25,8 +26,8 @@ const handleBlogRouter = async (req, res) => {
       return new SuccessModel(data[0]);
     }
   } else if (method === 'POST') {
+    const params = req.body || {};
     if (pathname === '/api/blog/new') {
-      const params = req.body || {};
       const {title, content, author} = params;
       if (title && content && author) {
         const data = await createBlog(params);
@@ -35,7 +36,6 @@ const handleBlogRouter = async (req, res) => {
       return new ErrorModel('参数缺失，请检查');
     }
     if (pathname === '/api/blog/update') {
-      const params = req.body || {};
       const {title, content, author, id} = params;
       if (title && content && author && id) {
         const data = await updateBlog(params);
@@ -44,6 +44,16 @@ const handleBlogRouter = async (req, res) => {
         }
       }
       return new ErrorModel('参数缺失，请检查');
+    }
+    if (pathname === '/api/blog/delete') {
+      const {id} = params;
+      if (id) {
+        const data = await deleteBlog(id);
+        if (data.affectedRows > 0) {
+          return new SuccessModel('删除成功');
+        }
+      }
+      return new ErrorModel();
     }
   }
 };

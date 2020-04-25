@@ -29,9 +29,15 @@ const updateBlog = (params) => {
   return exec(sql);
 };
 
+const deleteBlog = (id) => {
+  const sql = `delete from blogs where id = ${id};`;
+  return exec(sql);
+};
+
 module.exports = {
   getList,
   getDetail,
   createBlog,
   updateBlog,
+  deleteBlog,
 };
