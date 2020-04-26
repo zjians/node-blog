@@ -1,5 +1,5 @@
 const querystring = require('querystring');
-const {postLogin} = require('../src/controller/user');
+const {get: redisGet} = require('../src/db/redis');
 
 /**
  * 获取post数据，并将数据格式化放到req.body上
@@ -48,7 +48,7 @@ const validateLogin = async (req) => {
   const cookie = req.headers.cookie || '';
   const cookieObj = getCookie(cookie);
   if (!cookieObj) return false;
-  const data = global.USERSESSON[cookieObj['sessionId']];
+  const data = await redisGet(cookieObj['sessionId']);
   if (data) {
     return true;
   }

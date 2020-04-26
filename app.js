@@ -2,7 +2,6 @@ const handleUserRouter = require('./src/router/user');
 const handleBlogRouter = require('./src/router/blog');
 const url = require('url');
 const {getPostData, validateLogin} = require('./utils');
-global.USERSESSON = {};
 
 exports.handleServer = async (req, res) => {
   const {pathname} = url.parse(req.url, true);
