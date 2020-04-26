@@ -14,9 +14,12 @@ const handleUserRouter = async (req, res) => {
         const data = await postLogin(params);
         if (data && data.length) {
           // 登录成功则 set-cookie
+          let expire = 3600 * 1000; // 一小时后过期
+          let time = new Date(Date.now() + expire).toGMTString();
+          console.log(time);
           res.setHeader('Set-Cookie', [
-            `username=${username};path=/;httpOnly`,
-            `password=${password};path=/;httpOnly`,
+            `username=${username};path=/;httpOnly;expires=${time}`,
+            `password=${password};path=/;httpOnly;expires=${time}`,
           ]);
           return new SuccessModel('登录成功');
         }
