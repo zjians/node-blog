@@ -21,7 +21,11 @@ function get(key) {
         reject(err);
         return;
       }
-      resolve(val);
+      try {
+        resolve(JSON.parse(val));
+      } catch (error) {
+        resolve(val);
+      }
     });
   });
 }
