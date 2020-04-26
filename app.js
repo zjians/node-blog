@@ -17,7 +17,7 @@ exports.handleServer = async (req, res) => {
   req.body = (await getPostData(req)) || {};
   const userRouter = await handleUserRouter(req, res);
   const blogRouter = await handleBlogRouter(req, res);
-  res.writeHead(200, {'Content-Type': 'application/json'});
+  res.writeHead(200, {'Content-Type': 'application/json;charset=utf-8;'});
   if (userRouter) {
     res.end(JSON.stringify(userRouter));
     return;
