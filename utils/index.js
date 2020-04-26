@@ -46,10 +46,10 @@ const getCookie = (cookieStr) => {
  */
 const validateLogin = async (req) => {
   const cookie = req.headers.cookie || '';
-  const params = getCookie(cookie);
-  if (!params) return false;
-  const data = await postLogin(params);
-  if (data && data.length) {
+  const cookieObj = getCookie(cookie);
+  if (!cookieObj) return false;
+  const data = global.USERSESSON[cookieObj['sessionId']];
+  if (data) {
     return true;
   }
   return false;
